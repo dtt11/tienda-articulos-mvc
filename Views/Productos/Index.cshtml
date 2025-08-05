@@ -1,0 +1,54 @@
+﻿@model List<Producto>
+@{
+}
+
+<h2 class="text-center mb-5"> Lista de Productos</h2>
+
+<div>
+	<div class="col">
+		<a class="btn btn-success" asp-controller="Productos" asp-action="Crear">Nuevo Producto</a>
+
+	</div>
+
+	<div class ="col">
+
+
+	</div>
+</div>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Marca</th>
+			<th>Categoria</th>
+			<th>Precio</th>
+			<th>Imagen</th>
+			<th>Fecha</th>
+			<th>Accion</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var producto in Model)  
+		{
+			<tr>
+				<td>@producto.Id</td>
+				<td>@producto.Nombre</td>
+				<td>@producto.Marca</td>
+				<td>@producto.Categoria</td>
+				<td>@(producto.Precio  )₡</td>
+				<td><img src="/ImagenesProductos/@producto.ProductoImagen" width="100"/></td>
+				<td>@producto.Fecha.ToString("MM/dd/yyyy")</td>
+				<td style="white-space:nowrap">
+					<a class="btn btn-primary btn-sm" asp-controller="Productos" asp-action="Editar"
+					asp-route-id="@producto.Id">Editar</a>
+					<a class="btn btn-danger btn-sm" asp-controller="Productos" asp-action="Eliminar"
+					   asp-route-id="@producto.Id"onclick="return confirm('Estás seguro?')">Eliminar</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+
+</table>
