@@ -1,90 +1,463 @@
 ﻿@{
     ViewData["Title"] = "Inicio - Tienda MVC";
 }
-
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>Inicio - Tienda MVC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar moderna con glassmorphism */
+        .modern-navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+            .modern-navbar .navbar-brand {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: white !important;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            .modern-navbar .nav-link {
+                color: rgba(255, 255, 255, 0.9) !important;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                margin: 0 5px;
+                border-radius: 25px;
+                padding: 8px 20px !important;
+            }
+
+                .modern-navbar .nav-link:hover,
+                .modern-navbar .nav-link.active {
+                    background: rgba(255, 255, 255, 0.2);
+                    color: white !important;
+                    transform: translateY(-2px);
+                }
+
+        /* Hero section mejorado */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.05)"><polygon points="1000,100 1000,0 0,100"/></svg>');
+                background-size: cover;
+            }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .modern-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .modern-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.5s;
+            }
+
+            .modern-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+                color: white;
+                text-decoration: none;
+            }
+
+                .modern-btn:hover::before {
+                    left: 100%;
+                }
+
+        /* Cards modernas */
+        .features-section {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .feature-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+                transition: left 0.5s;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            }
+
+                .feature-card:hover::before {
+                    left: 100%;
+                }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-card.create .feature-icon {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+        }
+
+        .feature-card.edit .feature-icon {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+        }
+
+        .feature-card.delete .feature-icon {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #7f8c8d;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Footer moderno */
+        .modern-footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+            .modern-footer p {
+                margin: 0;
+                font-size: 1rem;
+                opacity: 0.9;
+            }
+
+        /* Animaciones */
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+            .animate-on-scroll.animate {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .modern-btn {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+
+            .feature-card {
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Efectos de partículas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!-- Partículas de fondo -->
+    <div class="particles">
+        <div class="particle" style="left: 10%; top: 20%; width: 10px; height: 10px; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; top: 80%; width: 15px; height: 15px; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 60%; top: 30%; width: 8px; height: 8px; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 80%; top: 70%; width: 12px; height: 12px; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 30%; top: 10%; width: 6px; height: 6px; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 70%; top: 90%; width: 14px; height: 14px; animation-delay: 5s;"></div>
+    </div>
+
+    <!-- Navbar moderna -->
+    <nav class="navbar navbar-expand-lg modern-navbar">
         <div class="container">
-            <a class="navbar-brand" href="#">Tienda MVC</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-gem me-2"></i>Tienda MVC
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" asp-controller="Home" asp-action="Index">Inicio</a>
+                        <a class="nav-link active" asp-controller="Home" asp-action="Index">
+                            <i class="fas fa-home me-1"></i>Inicio
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Productos" asp-action="Index">Productos</a>
+                        <a class="nav-link" asp-controller="Productos" asp-action="Index">
+                            <i class="fas fa-shopping-bag me-1"></i>Productos
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero principal -->
-    <section class="bg-light py-5">
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold">Bienvenido a Tienda MVC</h1>
-            <p class="lead">Una aplicación ASP.NET Core MVC para administrar tu catálogo de productos.</p>
-            <a asp-controller="Productos" asp-action="Index" class="btn btn-primary btn-lg mt-3">
-                <i class="fas fa-store me-2"></i> Ver productos
-            </a>
-        </div>
-    </section>
-
-    <!-- Características -->
-    <section class="container my-5">
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <i class="fas fa-plus-circle fa-3x text-success mb-3"></i>
-                        <h4>Crear productos</h4>
-                        <p>Agrega nuevos productos con imágenes, descripción y precios fácilmente.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <i class="fas fa-edit fa-3x text-warning mb-3"></i>
-                        <h4>Editar productos</h4>
-                        <p>Actualiza la información de tus productos de manera sencilla y rápida.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <i class="fas fa-trash-alt fa-3x text-danger mb-3"></i>
-                        <h4>Eliminar productos</h4>
-                        <p>Elimina productos que ya no forman parte de tu inventario.</p>
-                    </div>
-                </div>
+    <!-- Hero section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="text-center">
+                <h1 class="hero-title">Tienda MVC</h1>
+                <p class="hero-subtitle">La plataforma más moderna para gestionar tu catálogo de productos con estilo y eficiencia</p>
+                <a asp-controller="Productos" asp-action="Index" class="modern-btn">
+                    <i class="fas fa-rocket me-2"></i>Explorar Productos
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p class="mb-0">&copy; @DateTime.Now.Year - Tienda MVC. Todos los derechos reservados.</p>
+    <!-- Features section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card create animate-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h4>Crear Productos</h4>
+                        <p>Añade nuevos productos a tu inventario de forma intuitiva con nuestra interfaz moderna y fácil de usar.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card edit animate-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h4>Editar Información</h4>
+                        <p>Actualiza los detalles de tus productos en tiempo real con herramientas de edición potentes y versátiles.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card delete animate-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <h4>Gestionar Inventario</h4>
+                        <p>Elimina productos obsoletos y mantén tu catálogo actualizado con controles de gestión avanzados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer moderno -->
+    <footer class="modern-footer">
+        <div class="container">
+            <p>
+                <i class="fas fa-heart me-1" style="color: #ff6b6b;"></i>
+                © @DateTime.Now.Year Tienda MVC. Diseñado con pasión para desarrolladores modernos.
+            </p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animación on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Efecto parallax suave en el navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.modern-navbar');
+            const scrolled = window.pageYOffset;
+
+            if (scrolled > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.15)';
+                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+            }
+        });
+
+        // Animación de escritura para el título
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Inicializar animaciones cuando la página carga
+        window.addEventListener('load', function() {
+            const title = document.querySelector('.hero-title');
+            const originalText = title.textContent;
+            typeWriter(title, originalText, 150);
+        });
+    </script>
 </body>
 </html>
